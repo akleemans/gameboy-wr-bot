@@ -14,7 +14,7 @@ Currently, the following speedrun.com platforms are tracked: GB, GBC, GBA, SGB, 
 
 ## How it works
 
-Periodically (all 5 mins), all new runs for the GB platforms (see above) are fetched and checked if
+Periodically (every hour), all new runs for the GB platforms (see above) are fetched and checked if
 they are first place on their respective leaderboards. The run-ids are then cached so upon newer
 fetching, it's clear whether the run is already known or a new one.
 
