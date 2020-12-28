@@ -39,7 +39,10 @@ def get_readable_time(duration: str) -> str:
 
     if seconds % 1 == 0:
         seconds = math.floor(seconds % 60)
-    s += f'{seconds % 60}s'
+    else:
+        seconds = round(seconds % 60 * 100) / 100
+
+    s += f'{seconds}s'
     return s
 
 
@@ -78,7 +81,6 @@ def fetch_latest_wr_runs() -> List[Dict]:
               run['game'] + '/category/' + run['category'] + '?top=1'
         category_runs = json.loads(requests.get(url).text)['data']
         first_place = category_runs['runs'][0]['run']
-        print('Debug:', first_place)
         if run['id'] == first_place['id']:
             print('[fetch.py] Found new WR:', run['weblink'], 'fetching info')
             url = f'https://www.speedrun.com/api/v1/runs/{run["id"]}?embed=game,players,category'
