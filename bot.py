@@ -40,7 +40,7 @@ async def on_ready():
               server.id)
 
         for channel in server.channels:
-            if str(channel.type) == 'text' and 'gb-wr-bot' in str(channel):
+            if str(channel.type) == 'text' and 'new-world-records' in str(channel):
                 print('[bot.py] sending to channel:', channel)
                 for run in wr_runs:
                     await channel.send(embed=create_message(run))
