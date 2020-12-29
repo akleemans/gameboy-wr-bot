@@ -43,7 +43,10 @@ async def on_ready():
             if str(channel.type) == 'text' and 'new-world-records' in str(channel):
                 print('[bot.py] sending to channel:', channel)
                 for run in wr_runs:
-                    await channel.send(embed=create_message(run))
+                    try:
+                        await channel.send(embed=create_message(run))
+                    except discord.errors.DiscordException as e:
+                        print('Sending not possible, skipping channel:', e)
 
     print('[bot.py] All done, going back to sleep.')
     await client.logout()
