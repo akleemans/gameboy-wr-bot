@@ -1,7 +1,7 @@
 # gameboy-wr-bot
 
-Discord bot for tracking Game Boy related speedrun world records.
-Inspired by [slashinfty/gbwr](https://github.com/slashinfty/gbwr).
+Discord bot for tracking Game Boy related speedrun world records. Inspired
+by [slashinfty/gbwr](https://github.com/slashinfty/gbwr).
 
 ## How to use
 
@@ -36,6 +36,12 @@ Then apply your changes in the following files:
   latest runs.
 * `known_runs.json`: Save run IDs to check if a run was already processed (and notified). This file
   will be created on the first run of the bot.
+
+### Tests
+
+To run the tests (mainly for time formatting), run
+
+    python3 -m unittest
 
 ## Deployment
 
