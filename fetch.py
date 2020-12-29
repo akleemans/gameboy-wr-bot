@@ -1,7 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import json
 import math
 import time
-from datetime import datetime
 from typing import Dict, List
 
 import isodate
@@ -19,30 +21,24 @@ gb_platforms = [
 ]
 
 
-def convert_runs(runs: List[Dict]) -> List[Dict]:
-    """ Convert runs for saving them """
-    now = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
-    return [{'id': run['id'], 'verify-date': run['status']['verify-date'],
-             'save-date': now} for run in runs]
-
-
 def get_readable_time(duration: str) -> str:
     """ Converts ISO duration strings like 'PT52.250S' into a readable time """
     seconds = isodate.parse_duration(duration).total_seconds()
-    minutes = seconds // 60
-    hours = seconds // 3600
+    ms = round(seconds % 1 * 1000)
+    ss = math.floor(seconds % 60)
+    mm = math.floor(seconds // 60 % 60)
+    hh = math.floor(seconds // 3600)
     s = ''
-    if hours > 0:
-        s = f'{hours}h '
-    if minutes > 0:
-        s += f'{math.floor(minutes % 60)}m '
 
-    if seconds % 1 == 0:
-        seconds = math.floor(seconds % 60)
-    else:
-        seconds = round(seconds % 60 * 100) / 100
+    if hh > 0:
+        s = f'{hh}h '
+    if mm > 0:
+        s += f'{mm}m '
 
-    s += f'{seconds}s'
+    s += f'{ss}s'
+
+    if ms > 0:
+        s += f' {ms}ms'
     return s
 
 
@@ -97,9 +93,8 @@ def fetch_latest_wr_runs() -> List[Dict]:
                             'category': category})
 
     # Save new runs as known runs for future reference
-    known_runs = convert_runs(latest_runs)
     with open('known_runs.json', 'w') as known_runs_file:
-        known_runs_file.write(json.dumps(known_runs, indent=4))
+        known_runs_file.write(json.dumps(latest_runs, indent=4))
     print('[fetch.py] Returning', len(wr_runs), 'WR runs.')
     return wr_runs
 
