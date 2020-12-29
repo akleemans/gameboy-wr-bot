@@ -3,6 +3,10 @@
 Discord bot for tracking Game Boy related speedrun world records. Inspired
 by [slashinfty/gbwr](https://github.com/slashinfty/gbwr).
 
+<p align="center">
+    <img src="https://github.com/akleemans/gameboy-wr-bot/blob/master/screenshot.png" alt="gameboy-wr-bot">
+</p>
+
 ## How to use
 
 1. Invite the bot via
