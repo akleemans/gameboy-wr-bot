@@ -12,8 +12,8 @@ import requests
 # All GB platforms we want to check
 gb_platforms = [
     'n5683oev',  # Game Boy
-    'gde3g9k1',  # Game Boy Color
-    '3167d6q2',  # Game Boy Advance
+    # 'gde3g9k1',  # Game Boy Color
+    # '3167d6q2',  # Game Boy Advance
     'vm9v3ne3',  # Game Boy Interface
     '7m6yvw6p',  # Game Boy Player
     '3167jd6q',  # Super Game Boy

@@ -12,10 +12,10 @@ by [slashinfty/gbwr](https://github.com/slashinfty/gbwr).
 1. Invite the bot via
    this [Bot invite link](https://discord.com/api/oauth2/authorize?client_id=792776699984216114&permissions=2048&scope=bot)
    . It will need the "Send message" permission, obviously.
-2. Have a channel with 'gb-wr-bot' in its name on your server. The bot will automatically post new
+2. Have a channel with 'new-world-records' in its name on your server. The bot will automatically post new
    WRs there!
 
-Currently, the following speedrun.com platforms are tracked: GB, GBC, GBA, SGB, SGB2, GBP, and GBi.
+Currently, the following speedrun.com platforms are tracked: GB, SGB, SGB2, GBP, and GBi.
 
 ## How it works
 
