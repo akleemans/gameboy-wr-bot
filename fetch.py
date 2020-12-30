@@ -4,7 +4,7 @@
 import json
 import math
 import time
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import isodate
 import requests
@@ -19,6 +19,22 @@ gb_platforms = [
     '3167jd6q',  # Super Game Boy
     'n5e147e2',  # Super Game Boy 2
 ]
+
+
+def download(url: str) -> Union[List, Dict]:
+    print('[fetch.py::download] Fetching', url)
+    content = ''
+    try:
+        content = json.loads(requests.get(url).text)
+        data = content['data']
+    except KeyError as e:
+        print('[fetch.py::download] ERROR: no data attribute in', content)
+        return []
+    except:
+        print('[fetch.py::download] ERROR: other error occurred')
+        return []
+    else:
+        return data
 
 
 def get_readable_time(duration: str) -> str:
@@ -49,7 +65,7 @@ def fetch_latest_wr_runs() -> List[Dict]:
     start_time = time.time()
     for platform in gb_platforms:
         url = f'https://www.speedrun.com/api/v1/runs?status=verified&platform={platform}&orderby=verify-date&direction=desc'
-        platform_runs = json.loads(requests.get(url).text)['data']
+        platform_runs = download(url)
         latest_runs.extend(platform_runs)
     print('[fetch.py] Fetched all platforms in',
           round(time.time() - start_time, 2), 's')
@@ -75,12 +91,12 @@ def fetch_latest_wr_runs() -> List[Dict]:
         print('[fetch.py] Checking run', run['weblink'])
         url = 'https://www.speedrun.com/api/v1/leaderboards/' + \
               run['game'] + '/category/' + run['category'] + '?top=1'
-        category_runs = json.loads(requests.get(url).text)['data']
+        category_runs = download(url)
         first_place = category_runs['runs'][0]['run']
         if run['id'] == first_place['id']:
             print('[fetch.py] Found new WR:', run['weblink'], 'fetching info')
             url = f'https://www.speedrun.com/api/v1/runs/{run["id"]}?embed=game,players,category'
-            wr_run = json.loads(requests.get(url).text)['data']
+            wr_run = download(url)
             game_name = wr_run['game']['data']['names']['international']
             player = wr_run['players']['data'][0]['names']['international']
             category = wr_run['category']['data']['name']
