@@ -2,115 +2,109 @@
 # -*- coding: utf-8 -*-
 
 import json
-import math
-import time
-from typing import Dict, List, Union
+from typing import Dict, List
 
-import isodate
-import requests
+from tools import download, get_readable_time, gb_platforms
 
-# All GB platforms we want to check
-gb_platforms = [
-    'n5683oev',  # Game Boy
-    # 'gde3g9k1',  # Game Boy Color
-    # '3167d6q2',  # Game Boy Advance
-    'vm9v3ne3',  # Game Boy Interface
-    '7m6yvw6p',  # Game Boy Player
-    '3167jd6q',  # Super Game Boy
-    'n5e147e2',  # Super Game Boy 2
-]
+QUERY_GAME_AMOUNT = 100
 
 
-def download(url: str) -> Union[List, Dict]:
-    print('[fetch.py::download] Fetching', url)
-    content = ''
+def fetch_latest_wr_runs(fetch_all=False) -> List[Dict]:
+    """ Fetch game leaderboards and check for new top runs """
+    print('[fetch.py] Fetching runs, fetch_all=', fetch_all)
     try:
-        content = json.loads(requests.get(url).text)
-        data = content['data']
-    except KeyError as e:
-        print('[fetch.py::download] ERROR: no data attribute in', content)
-        return []
-    except:
-        print('[fetch.py::download] ERROR: other error occurred')
-        return []
-    else:
-        return data
-
-
-def get_readable_time(duration: str) -> str:
-    """ Converts ISO duration strings like 'PT52.250S' into a readable time """
-    seconds = isodate.parse_duration(duration).total_seconds()
-    ms = round(seconds % 1 * 1000)
-    ss = math.floor(seconds % 60)
-    mm = math.floor(seconds // 60 % 60)
-    hh = math.floor(seconds // 3600)
-    s = ''
-
-    if hh > 0:
-        s = f'{hh}h '
-    if mm > 0:
-        s += f'{mm}m '
-
-    s += f'{ss}s'
-
-    if ms > 0:
-        s += f' {ms}ms'
-    return s
-
-
-def fetch_latest_wr_runs() -> List[Dict]:
-    """ Fetch recently verified runs """
-    print('[fetch.py] Fetching latest runs')
-    latest_runs = []
-    start_time = time.time()
-    for platform in gb_platforms:
-        url = f'https://www.speedrun.com/api/v1/runs?status=verified&platform={platform}&orderby=verify-date&direction=desc'
-        platform_runs = download(url)
-        latest_runs.extend(platform_runs)
-    print('[fetch.py] Fetched all platforms in',
-          round(time.time() - start_time, 2), 's')
-
-    print('[fetch.py] Reading known runs')
-    try:
-        with open('known_runs.json', 'r') as known_runs_file:
-            known_runs = json.loads(known_runs_file.read())
-        known_ids = [run['id'] for run in known_runs]
+        with open('gb_games.json', 'r') as games_file:
+            games = json.loads(games_file.read())
     except FileNotFoundError:
-        known_ids = []
+        games = []
 
-    # Check for WR runs
+    # Normal run: only check some chunk of games
+    new_progress = 0
+    if not fetch_all:
+        progress = 0
+        print('[fetch.py] Reading progress')
+        try:
+            with open('progress.json', 'r') as progress_file:
+                progress = json.loads(progress_file.read())['progress']
+            print(f'[fetch.py] Starting with progress={progress}')
+        except FileNotFoundError:
+            print(
+                f'[fetch.py] Progress file not found, using progress={progress}')
+        new_progress = (progress + QUERY_GAME_AMOUNT) % len(games)
+        # If we passed the end, start from beginning
+        if new_progress < progress:
+            games = games[progress:] + games[:new_progress]
+        else:
+            games = games[progress:new_progress]
+
+    print('[fetch.py] Reading leaderboards')
+    try:
+        with open('leaderboards.json', 'r') as leaderboards_file:
+            leaderboards = json.loads(leaderboards_file.read())
+    except FileNotFoundError:
+        leaderboards = {}
+
+    # Fetch current leaderboards for game
+    wr_run_ids = []
+    print(f'[fetch.py] Preparing to fetch {len(games)} games')
+    for game_id in games:
+        url = f'https://www.speedrun.com/api/v1/games/{game_id}/records?miscellaneous=no&scope=full-game&skip-empty=true&top=1'
+        categories = download(url)
+
+        current_game = {}
+        for category in categories:
+            category_id = category['category']
+            top_run = category['runs'][0]['run']
+            top_run_id = top_run['id']
+
+            # If new game, new category or different run, it's a new WR
+            if game_id not in leaderboards or category_id not in leaderboards[
+                game_id] or leaderboards[game_id][category_id] != top_run_id:
+                print(
+                    f'Found new top run {top_run_id} for category {category_id} in game {game_id}')
+                wr_run_ids.append(top_run_id)
+
+            # Update current category with top run
+            current_game[category_id] = top_run_id
+
+        # Update current game entry
+        leaderboards[game_id] = current_game
+
+    # Fetch additional info for new WR runs
     wr_runs = []
-    for run in latest_runs:
-        # Skip known runs
-        if run['id'] in known_ids:
-            continue
-        # Don't check single level runs
-        if run['level'] != None:
+    for run_id in wr_run_ids:
+        print(f'[fetch.py] Found new WR: {run_id}, fetching info')
+        url = f'https://www.speedrun.com/api/v1/runs/{run_id}?embed=game,players,category'
+        wr_run = download(url)
+
+        # Check if run itself was also on a platform we look for
+        if wr_run['system']['platform'] not in gb_platforms:
             continue
 
-        print('[fetch.py] Checking run', run['weblink'])
-        url = 'https://www.speedrun.com/api/v1/leaderboards/' + \
-              run['game'] + '/category/' + run['category'] + '?top=1'
-        category_runs = download(url)
-        first_place = category_runs['runs'][0]['run']
-        if run['id'] == first_place['id']:
-            print('[fetch.py] Found new WR:', run['weblink'], 'fetching info')
-            url = f'https://www.speedrun.com/api/v1/runs/{run["id"]}?embed=game,players,category'
-            wr_run = download(url)
-            game_name = wr_run['game']['data']['names']['international']
+        # Check if player is guest or not
+        if wr_run['players']['data'][0]['rel'] == 'guest':
+            player = wr_run['players']['data'][0]['name']
+        else:
             player = wr_run['players']['data'][0]['names']['international']
-            category = wr_run['category']['data']['name']
-            image = wr_run['game']['data']['assets']['cover-small']['uri']
-            primary_time = get_readable_time(wr_run['times']['primary'])
-            wr_runs.append({'id': run['id'], 'player': player, 'image': image,
-                            'weblink': wr_run['weblink'],
-                            'primary_time': primary_time,
-                            'date-played': wr_run['date'], 'game': game_name,
-                            'category': category})
 
-    # Save new runs as known runs for future reference
-    with open('known_runs.json', 'w') as known_runs_file:
-        known_runs_file.write(json.dumps(latest_runs, indent=4))
+        game_name = wr_run['game']['data']['names']['international']
+        category = wr_run['category']['data']['name']
+        image = wr_run['game']['data']['assets']['cover-small']['uri']
+        primary_time = get_readable_time(wr_run['times']['primary'])
+        wr_runs.append({'id': run_id, 'player': player, 'image': image,
+                        'weblink': wr_run['weblink'],
+                        'primary_time': primary_time,
+                        'date-played': wr_run['date'], 'game': game_name,
+                        'category': category})
+
+    # Save progress
+    with open('progress.json', 'w') as progress_file:
+        progress_file.write(json.dumps({'progress': new_progress}, indent=4))
+
+    # Save leaderboards
+    with open('leaderboards.json', 'w') as leaderboards_file:
+        leaderboards_file.write(json.dumps(leaderboards, indent=4))
+
     print('[fetch.py] Returning', len(wr_runs), 'WR runs.')
     return wr_runs
 
