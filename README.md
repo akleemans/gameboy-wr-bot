@@ -19,8 +19,8 @@ Currently, the following speedrun.com platforms are tracked: GB, SGB, SGB2, GBP,
 
 ## How it works
 
-Periodically (every hour), all new runs for the GB platforms (see above) are fetched and checked if
-they are first place on their respective leaderboards. The run-ids are then cached so upon newer
+Periodically (every hour), games with a GB platform (see above) are fetched and checked if
+they hold a new first place on the leaderboards. The run-ids are then cached so upon newer
 fetching, it's clear whether the run is already known or a new one.
 
 The bot is hosted by me, see below if you want to set up your own instance.
