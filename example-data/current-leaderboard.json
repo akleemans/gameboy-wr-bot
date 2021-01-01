@@ -1,0 +1,229 @@
+{
+  "data": [
+    {
+      "weblink": "https://www.speedrun.com/gauntlet_ii#10_Levels",
+      "game": "y6545z7d",
+      "category": "rklq0lw2",
+      "level": null,
+      "platform": null,
+      "region": null,
+      "emulators": null,
+      "video-only": false,
+      "timing": null,
+      "values": {},
+      "runs": [
+        {
+          "place": 1,
+          "run": {
+            "id": "zprlpqnm",
+            "weblink": "https://www.speedrun.com/gauntlet_ii/run/zprlpqnm",
+            "game": "y6545z7d",
+            "level": null,
+            "category": "rklq0lw2",
+            "videos": {
+              "links": [
+                {
+                  "uri": "https://www.twitch.tv/videos/611513952"
+                }
+              ]
+            },
+            "comment": "Nestopia Emulator\r\n\r\nFrame count 1:21.266\r\nFrom frame before Elf 2000 HP appears to frame spinning animation in exit begins.\r\n\r\nIdeal exit locations for level 7 and 9. ",
+            "status": {
+              "status": "verified",
+              "examiner": "qj20qklx",
+              "verify-date": "2020-05-05T17:59:53Z"
+            },
+            "players": [
+              {
+                "rel": "user",
+                "id": "5j5vd6z8",
+                "uri": "https://www.speedrun.com/api/v1/users/5j5vd6z8"
+              }
+            ],
+            "date": "2020-05-04",
+            "submitted": "2020-05-05T15:21:24Z",
+            "times": {
+              "primary": "PT1M21.266S",
+              "primary_t": 81.266,
+              "realtime": "PT1M21.266S",
+              "realtime_t": 81.266,
+              "realtime_noloads": null,
+              "realtime_noloads_t": 0,
+              "ingame": null,
+              "ingame_t": 0
+            },
+            "system": {
+              "platform": "jm95z9ol",
+              "emulated": true,
+              "region": "pr184lqn"
+            },
+            "splits": null,
+            "values": {}
+          }
+        }
+      ],
+      "links": [
+        {
+          "rel": "game",
+          "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+        },
+        {
+          "rel": "category",
+          "uri": "https://www.speedrun.com/api/v1/categories/rklq0lw2"
+        }
+      ]
+    },
+    {
+      "weblink": "https://www.speedrun.com/gauntlet_ii#Kill_a_Dragon",
+      "game": "y6545z7d",
+      "category": "ndxmr9j2",
+      "level": null,
+      "platform": null,
+      "region": null,
+      "emulators": null,
+      "video-only": false,
+      "timing": null,
+      "values": {},
+      "runs": [
+        {
+          "place": 1,
+          "run": {
+            "id": "y25dk9jy",
+            "weblink": "https://www.speedrun.com/gauntlet_ii/run/y25dk9jy",
+            "game": "y6545z7d",
+            "level": null,
+            "category": "ndxmr9j2",
+            "videos": {
+              "links": [
+                {
+                  "uri": "https://www.twitch.tv/videos/611506949"
+                }
+              ]
+            },
+            "comment": "Nestopia Emulator\r\n\r\nFrame counted to 3:00.916\r\n\r\n",
+            "status": {
+              "status": "verified",
+              "examiner": "qj20qklx",
+              "verify-date": "2020-05-05T18:00:48Z"
+            },
+            "players": [
+              {
+                "rel": "user",
+                "id": "5j5vd6z8",
+                "uri": "https://www.speedrun.com/api/v1/users/5j5vd6z8"
+              }
+            ],
+            "date": "2020-05-04",
+            "submitted": "2020-05-05T15:13:25Z",
+            "times": {
+              "primary": "PT3M0.916S",
+              "primary_t": 180.916,
+              "realtime": "PT3M0.916S",
+              "realtime_t": 180.916,
+              "realtime_noloads": null,
+              "realtime_noloads_t": 0,
+              "ingame": null,
+              "ingame_t": 0
+            },
+            "system": {
+              "platform": "jm95z9ol",
+              "emulated": true,
+              "region": "pr184lqn"
+            },
+            "splits": null,
+            "values": {}
+          }
+        }
+      ],
+      "links": [
+        {
+          "rel": "game",
+          "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+        },
+        {
+          "rel": "category",
+          "uri": "https://www.speedrun.com/api/v1/categories/ndxmr9j2"
+        }
+      ]
+    },
+    {
+      "weblink": "https://www.speedrun.com/gauntlet_ii#10_Levels_Gameboy",
+      "game": "y6545z7d",
+      "category": "wk6n8gp2",
+      "level": null,
+      "platform": null,
+      "region": null,
+      "emulators": null,
+      "video-only": false,
+      "timing": null,
+      "values": {},
+      "runs": [
+        {
+          "place": 1,
+          "run": {
+            "id": "yd0vqr0z",
+            "weblink": "https://www.speedrun.com/gauntlet_ii/run/yd0vqr0z",
+            "game": "y6545z7d",
+            "level": null,
+            "category": "wk6n8gp2",
+            "videos": {
+              "links": [
+                {
+                  "uri": "https://youtu.be/hNjKpZ2IyTo"
+                }
+              ]
+            },
+            "comment": "Gauntlet II (GB) in 3:52.600\r\nPlayed on SGB2 with original cartridge (EU)\r\nFrame timed to 3m 52s 600ms",
+            "status": {
+              "status": "verified",
+              "examiner": "68w4znlx",
+              "verify-date": "2020-12-15T13:30:11Z"
+            },
+            "players": [
+              {
+                "rel": "user",
+                "id": "68w4znlx",
+                "uri": "https://www.speedrun.com/api/v1/users/68w4znlx"
+              }
+            ],
+            "date": "2020-12-15",
+            "submitted": "2020-12-15T13:30:11Z",
+            "times": {
+              "primary": "PT3M52.600S",
+              "primary_t": 232.6,
+              "realtime": "PT3M52.600S",
+              "realtime_t": 232.6,
+              "realtime_noloads": null,
+              "realtime_noloads_t": 0,
+              "ingame": null,
+              "ingame_t": 0
+            },
+            "system": {
+              "platform": "n5e147e2",
+              "emulated": false,
+              "region": "e6lxy1dz"
+            },
+            "splits": null,
+            "values": {}
+          }
+        }
+      ],
+      "links": [
+        {
+          "rel": "game",
+          "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+        },
+        {
+          "rel": "category",
+          "uri": "https://www.speedrun.com/api/v1/categories/wk6n8gp2"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "offset": 0,
+    "max": 20,
+    "size": 3,
+    "links": []
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "data": {
+    "id": "yd0vqr0z",
+    "weblink": "https://www.speedrun.com/gauntlet_ii/run/yd0vqr0z",
+    "game": {
+      "data": {
+        "id": "y6545z7d",
+        "names": {
+          "international": "Gauntlet II",
+          "japanese": null,
+          "twitch": "Gauntlet II"
+        },
+        "abbreviation": "gauntlet_ii",
+        "weblink": "https://www.speedrun.com/gauntlet_ii",
+        "released": 1990,
+        "release-date": "1990-09-25",
+        "ruleset": {
+          "show-milliseconds": true,
+          "require-verification": true,
+          "require-video": true,
+          "run-times": [
+            "realtime"
+          ],
+          "default-time": "realtime",
+          "emulators-allowed": true
+        },
+        "romhack": false,
+        "gametypes": [],
+        "platforms": [
+          "jm95z9ol",
+          "gde3g9k1",
+          "3167d6q2",
+          "7m6yvw6p",
+          "n5e147e2",
+          "n5683oev",
+          "vm9v3ne3"
+        ],
+        "regions": [
+          "pr184lqn",
+          "e6lxy1dz"
+        ],
+        "genres": [
+          "o75mg539"
+        ],
+        "engines": [],
+        "developers": [
+          "k625dw6x"
+        ],
+        "publishers": [
+          "m0rvylrx"
+        ],
+        "moderators": {
+          "qj20qklx": "super-moderator",
+          "68w4znlx": "super-moderator"
+        },
+        "created": "2018-01-16T20:39:56Z",
+        "assets": {
+          "logo": {
+            "uri": "https://www.speedrun.com/themes/Default/logo.png",
+            "width": 640,
+            "height": 78
+          },
+          "cover-tiny": {
+            "uri": "https://www.speedrun.com/themes/gauntlet_ii/cover-32.png",
+            "width": 32,
+            "height": 45
+          },
+          "cover-small": {
+            "uri": "https://www.speedrun.com/themes/gauntlet_ii/cover-64.png",
+            "width": 64,
+            "height": 90
+          },
+          "cover-medium": {
+            "uri": "https://www.speedrun.com/themes/gauntlet_ii/cover-128.png",
+            "width": 128,
+            "height": 180
+          },
+          "cover-large": {
+            "uri": "https://www.speedrun.com/themes/gauntlet_ii/cover-256.png",
+            "width": 256,
+            "height": 360
+          },
+          "icon": {
+            "uri": "https://www.speedrun.com/themes/Default/favicon.png",
+            "width": 64,
+            "height": 64
+          },
+          "trophy-1st": {
+            "uri": "https://www.speedrun.com/themes/Default/1st.png",
+            "width": 64,
+            "height": 64
+          },
+          "trophy-2nd": {
+            "uri": "https://www.speedrun.com/themes/Default/2nd.png",
+            "width": 64,
+            "height": 64
+          },
+          "trophy-3rd": {
+            "uri": "https://www.speedrun.com/themes/Default/3rd.png",
+            "width": 64,
+            "height": 64
+          },
+          "trophy-4th": null,
+          "background": {
+            "uri": "https://www.speedrun.com/themes/gauntlet/background.png",
+            "width": 700,
+            "height": 470
+          },
+          "foreground": null
+        },
+        "links": [
+          {
+            "rel": "self",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+          },
+          {
+            "rel": "runs",
+            "uri": "https://www.speedrun.com/api/v1/runs?game=y6545z7d"
+          },
+          {
+            "rel": "levels",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/levels"
+          },
+          {
+            "rel": "categories",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/categories"
+          },
+          {
+            "rel": "variables",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/variables"
+          },
+          {
+            "rel": "records",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/records"
+          },
+          {
+            "rel": "series",
+            "uri": "https://www.speedrun.com/api/v1/series/5nd3z87r"
+          },
+          {
+            "rel": "derived-games",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/derived-games"
+          },
+          {
+            "rel": "romhacks",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d/derived-games"
+          },
+          {
+            "rel": "leaderboard",
+            "uri": "https://www.speedrun.com/api/v1/leaderboards/y6545z7d/category/rklq0lw2"
+          }
+        ]
+      }
+    },
+    "level": null,
+    "category": {
+      "data": {
+        "id": "wk6n8gp2",
+        "name": "10 Levels (Gameboy)",
+        "weblink": "https://www.speedrun.com/gauntlet_ii#10_Levels_Gameboy",
+        "type": "per-game",
+        "rules": "The goal is to beat level ten. Timer starts when you select a character and ends when you enter the exit in level ten.",
+        "players": {
+          "type": "exactly",
+          "value": 1
+        },
+        "miscellaneous": false,
+        "links": [
+          {
+            "rel": "self",
+            "uri": "https://www.speedrun.com/api/v1/categories/wk6n8gp2"
+          },
+          {
+            "rel": "game",
+            "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+          },
+          {
+            "rel": "variables",
+            "uri": "https://www.speedrun.com/api/v1/categories/wk6n8gp2/variables"
+          },
+          {
+            "rel": "records",
+            "uri": "https://www.speedrun.com/api/v1/categories/wk6n8gp2/records"
+          },
+          {
+            "rel": "runs",
+            "uri": "https://www.speedrun.com/api/v1/runs?category=wk6n8gp2"
+          },
+          {
+            "rel": "leaderboard",
+            "uri": "https://www.speedrun.com/api/v1/leaderboards/y6545z7d/category/wk6n8gp2"
+          }
+        ]
+      }
+    },
+    "videos": {
+      "links": [
+        {
+          "uri": "https://youtu.be/hNjKpZ2IyTo"
+        }
+      ]
+    },
+    "comment": "Gauntlet II (GB) in 3:52.600\r\nPlayed on SGB2 with original cartridge (EU)\r\nFrame timed to 3m 52s 600ms",
+    "status": {
+      "status": "verified",
+      "examiner": "68w4znlx",
+      "verify-date": "2020-12-15T13:30:11Z"
+    },
+    "players": {
+      "data": [
+        {
+          "rel": "user",
+          "id": "68w4znlx",
+          "names": {
+            "international": "adrianus",
+            "japanese": null
+          },
+          "weblink": "https://www.speedrun.com/user/adrianus",
+          "name-style": {
+            "style": "gradient",
+            "color-from": {
+              "light": "#EF8239",
+              "dark": "#EF8241"
+            },
+            "color-to": {
+              "light": "#249BCE",
+              "dark": "#44BBEE"
+            }
+          },
+          "role": "user",
+          "signup": "2019-09-24T03:56:32Z",
+          "location": {
+            "country": {
+              "code": "ch",
+              "names": {
+                "international": "Switzerland",
+                "japanese": null
+              }
+            }
+          },
+          "twitch": {
+            "uri": "https://www.twitch.tv/adrianus1"
+          },
+          "hitbox": null,
+          "youtube": {
+            "uri": "https://www.youtube.com/channel/UC0vxE8LfS3acSK3LQxYqNcA"
+          },
+          "twitter": {
+            "uri": "https://www.twitter.com/a_kleemans"
+          },
+          "speedrunslive": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "https://www.speedrun.com/api/v1/users/68w4znlx"
+            },
+            {
+              "rel": "runs",
+              "uri": "https://www.speedrun.com/api/v1/runs?user=68w4znlx"
+            },
+            {
+              "rel": "games",
+              "uri": "https://www.speedrun.com/api/v1/games?moderator=68w4znlx"
+            },
+            {
+              "rel": "personal-bests",
+              "uri": "https://www.speedrun.com/api/v1/users/68w4znlx/personal-bests"
+            }
+          ]
+        }
+      ]
+    },
+    "date": "2020-12-15",
+    "submitted": "2020-12-15T13:30:11Z",
+    "times": {
+      "primary": "PT3M52.600S",
+      "primary_t": 232.6,
+      "realtime": "PT3M52.600S",
+      "realtime_t": 232.6,
+      "realtime_noloads": null,
+      "realtime_noloads_t": 0,
+      "ingame": null,
+      "ingame_t": 0
+    },
+    "system": {
+      "platform": "n5e147e2",
+      "emulated": false,
+      "region": "e6lxy1dz"
+    },
+    "splits": null,
+    "values": {},
+    "links": [
+      {
+        "rel": "self",
+        "uri": "https://www.speedrun.com/api/v1/runs/yd0vqr0z"
+      },
+      {
+        "rel": "game",
+        "uri": "https://www.speedrun.com/api/v1/games/y6545z7d"
+      },
+      {
+        "rel": "category",
+        "uri": "https://www.speedrun.com/api/v1/categories/wk6n8gp2"
+      },
+      {
+        "rel": "platform",
+        "uri": "https://www.speedrun.com/api/v1/platforms/n5e147e2"
+      },
+      {
+        "rel": "region",
+        "uri": "https://www.speedrun.com/api/v1/regions/e6lxy1dz"
+      },
+      {
+        "rel": "examiner",
+        "uri": "https://www.speedrun.com/api/v1/users/68w4znlx"
+      }
+    ]
+  }
+}
