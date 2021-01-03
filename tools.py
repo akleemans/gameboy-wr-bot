@@ -68,7 +68,7 @@ def get_age(date1: str, date2: str) -> int:
         diff = d1 - d2
     else:
         diff = d2 - d1
-    return round(diff.seconds / 3600)
+    return round(diff.seconds / 3600 + diff.days * 24)
 
 
 def get_age_from_now(date: str) -> int:

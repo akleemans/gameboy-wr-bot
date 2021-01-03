@@ -43,7 +43,18 @@ class Tests(unittest.TestCase):
         self.assertEqual(2, get_age('2020-12-15T11:35:11Z',
                                     '2020-12-15T13:30:11Z'))
 
+    def test_age_days(self):
+        self.assertEqual(26, get_age('2020-12-14T11:25:11Z',
+                                     '2020-12-15T13:30:11Z'))
+        self.assertEqual(122, get_age('2020-12-10T11:35:11Z',
+                                      '2020-12-15T13:30:11Z'))
+
     def test_age_from_now(self):
         five_hours_ago = datetime.now() - timedelta(hours=5, minutes=12)
         self.assertEqual(5, get_age_from_now(
             five_hours_ago.strftime(DATE_FORMAT_SRC)))
+
+    def test_age_from_now_old(self):
+        old_run = datetime.strptime("2020-04-15T01:33:55Z", DATE_FORMAT_SRC)
+        age_in_hours = get_age_from_now(old_run.strftime(DATE_FORMAT_SRC))
+        self.assertLess(48, age_in_hours)
