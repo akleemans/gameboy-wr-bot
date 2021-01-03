@@ -32,7 +32,12 @@ def create_message(run: Dict) -> discord.Embed:
 @client.event
 async def on_ready():
     print('[bot.py] Fetching new WR runs...')
-    wr_runs = fetch_latest_wr_runs()
+    try:
+        wr_runs = fetch_latest_wr_runs()
+    except:
+        print('[bot.py] Error while fetching runs, quiting early')
+        await client.logout()
+        return
 
     print('[bot.py] Updating servers...')
     for server in client.guilds:
@@ -40,16 +45,20 @@ async def on_ready():
               server.id)
 
         for channel in server.channels:
-            if str(channel.type) == 'text' and 'new-world-records' in str(channel):
+            if str(channel.type) == 'text' and 'new-world-records' in str(
+                channel):
                 print('[bot.py] sending to channel:', channel)
                 for run in wr_runs:
                     try:
                         await channel.send(embed=create_message(run))
                     except discord.errors.DiscordException as e:
-                        print('Sending not possible, skipping channel:', e)
+                        print(
+                            '[bot.py] Sending not possible, skipping channel:',
+                            e)
 
     print('[bot.py] All done, going back to sleep.')
     await client.logout()
+    return
 
 
 client.run(TOKEN)

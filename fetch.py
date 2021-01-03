@@ -4,7 +4,7 @@
 import json
 from typing import Dict, List
 
-from tools import download, get_readable_time, gb_platforms
+from tools import download, get_readable_time, run_platforms, get_age_from_now
 
 QUERY_GAME_AMOUNT = 100
 
@@ -49,7 +49,11 @@ def fetch_latest_wr_runs(fetch_all=False) -> List[Dict]:
     print(f'[fetch.py] Preparing to fetch {len(games)} games')
     for game_id in games:
         url = f'https://www.speedrun.com/api/v1/games/{game_id}/records?miscellaneous=no&scope=full-game&skip-empty=true&top=1'
-        categories = download(url)
+        try:
+            categories = download(url)
+        except:
+            print(f'[fetch.py] Error fetching {game_id}, ignoring for now')
+            continue
 
         current_game = {}
         for category in categories:
@@ -58,16 +62,21 @@ def fetch_latest_wr_runs(fetch_all=False) -> List[Dict]:
             top_run_id = top_run['id']
 
             # If new game, new category or different run, it's a new WR
-            if game_id not in leaderboards or category_id not in leaderboards[
-                game_id] or leaderboards[game_id][category_id] != top_run_id:
+            if game_id not in leaderboards:
+                print(f'New game {game_id}, adding run')
+                wr_run_ids.append(top_run_id)
+            elif category_id not in leaderboards[game_id]:
+                print(f'New category {category_id} in game {game_id}')
+                wr_run_ids.append(top_run_id)
+            elif leaderboards[game_id][category_id] != top_run_id:
                 print(
-                    f'Found new top run {top_run_id} for category {category_id} in game {game_id}')
+                    f'New top run {top_run_id} for category {category_id} in game {game_id}')
                 wr_run_ids.append(top_run_id)
 
             # Update current category with top run
             current_game[category_id] = top_run_id
 
-        # Update current game entry
+        # Update current game entry (only on successful API call)
         leaderboards[game_id] = current_game
 
     # Fetch additional info for new WR runs
@@ -75,10 +84,21 @@ def fetch_latest_wr_runs(fetch_all=False) -> List[Dict]:
     for run_id in wr_run_ids:
         print(f'[fetch.py] Found new WR: {run_id}, fetching info')
         url = f'https://www.speedrun.com/api/v1/runs/{run_id}?embed=game,players,category'
-        wr_run = download(url)
+        try:
+            wr_run = download(url)
+        except:
+            print(f'[fetch.py] Error fetching run, skipping')
+            continue
 
         # Check if run itself was also on a platform we look for
-        if wr_run['system']['platform'] not in gb_platforms:
+        if wr_run['system']['platform'] not in run_platforms:
+            print(f'[fetch.py] Run not on GB platform, skipping')
+            continue
+
+        # Check if run was verified lately
+        verify_date = wr_run['status']['verify-date']
+        if verify_date is None or get_age_from_now(verify_date) > 48:
+            print(f'[fetch.py] Old run, skipping')
             continue
 
         # Check if player is guest or not
