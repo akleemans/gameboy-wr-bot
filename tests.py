@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+from datetime import datetime, timedelta
 
 from fetch import get_readable_time
+from tools import get_age, DATE_FORMAT_SRC, get_age_from_now
 
 
 class Tests(unittest.TestCase):
@@ -26,3 +28,22 @@ class Tests(unittest.TestCase):
         self.assertEqual('1h 17m 50s 100ms',
                          get_readable_time('PT1H17M50.100S'))
         self.assertEqual('3h 11m 28s', get_readable_time('PT3H11M28S'))
+
+    def test_age_simple(self):
+        self.assertEqual(2, get_age('2020-12-15T13:30:11Z',
+                                    '2020-12-15T11:30:11Z'))
+
+    def test_age_reverse(self):
+        self.assertEqual(2, get_age('2020-12-15T11:30:11Z',
+                                    '2020-12-15T13:30:11Z'))
+
+    def test_age_rounding(self):
+        self.assertEqual(2, get_age('2020-12-15T11:25:11Z',
+                                    '2020-12-15T13:30:11Z'))
+        self.assertEqual(2, get_age('2020-12-15T11:35:11Z',
+                                    '2020-12-15T13:30:11Z'))
+
+    def test_age_from_now(self):
+        five_hours_ago = datetime.now() - timedelta(hours=5, minutes=12)
+        self.assertEqual(5, get_age_from_now(
+            five_hours_ago.strftime(DATE_FORMAT_SRC)))

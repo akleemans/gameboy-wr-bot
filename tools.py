@@ -4,14 +4,24 @@
 import json
 import math
 import time
+from datetime import datetime
 from typing import Dict, List, Union
 
 import isodate
 import requests
 
+DATE_FORMAT_SRC = '%Y-%m-%dT%H:%M:%SZ'
+
 # All GB platforms we want to check
-gb_platforms = [
+game_platforms = [
     'n5683oev',  # Game Boy
+    '3167jd6q',  # Super Game Boy
+    'n5e147e2',  # Super Game Boy 2
+]
+
+run_platforms = [
+    'n5683oev',  # Game Boy
+    'gde3g9k1',  # Game Boy Color
     'vm9v3ne3',  # Game Boy Interface
     '7m6yvw6p',  # Game Boy Player
     '3167jd6q',  # Super Game Boy
@@ -22,20 +32,11 @@ gb_platforms = [
 def download(url: str) -> Union[List, Dict]:
     """ Download data from SRC API, with throttling """
     print('[tools.py::download] Fetching', url)
-    time.sleep(0.8)
+    time.sleep(1)
     headers = {'user-agent': 'akleemans-gameboy-wr-bot/2.0'}
-    content = ''
-    try:
-        content = json.loads(requests.get(url, headers=headers).text)
-        data = content['data']
-    except KeyError as e:
-        print('[tools.py::download] ERROR: no data attribute in', content)
-        return []
-    except:
-        print('[tools.py::download] ERROR: other error occurred')
-        return []
-    else:
-        return data
+    content = json.loads(requests.get(url, headers=headers).text)
+    data = content['data']
+    return data
 
 
 def get_readable_time(duration: str) -> str:
@@ -57,3 +58,20 @@ def get_readable_time(duration: str) -> str:
     if ms > 0:
         s += f' {ms}ms'
     return s
+
+
+def get_age(date1: str, date2: str) -> int:
+    """ Calculate date difference in hours """
+    d1 = datetime.strptime(date1, DATE_FORMAT_SRC)
+    d2 = datetime.strptime(date2, DATE_FORMAT_SRC)
+    if d1 > d2:
+        diff = d1 - d2
+    else:
+        diff = d2 - d1
+    return round(diff.seconds / 3600)
+
+
+def get_age_from_now(date: str) -> int:
+    """ Calculate age (from today) in hours """
+    now = datetime.now().strftime(DATE_FORMAT_SRC)
+    return get_age(now, date)
