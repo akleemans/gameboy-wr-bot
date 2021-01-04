@@ -21,7 +21,7 @@ game_platforms = [
 
 run_platforms = [
     'n5683oev',  # Game Boy
-    'gde3g9k1',  # Game Boy Color
+    # 'gde3g9k1',  # Game Boy Color
     'vm9v3ne3',  # Game Boy Interface
     '7m6yvw6p',  # Game Boy Player
     '3167jd6q',  # Super Game Boy
