@@ -130,4 +130,4 @@ def fetch_latest_wr_runs(fetch_all=False) -> List[Dict]:
 
 
 if __name__ == "__main__":
-    fetch_latest_wr_runs()
+    fetch_latest_wr_runs(fetch_all=True)
