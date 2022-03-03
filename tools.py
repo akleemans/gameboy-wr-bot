@@ -22,12 +22,12 @@ game_platforms = [
 # Run itself must have one of these platforms to qualify
 run_platforms = [
     'n5683oev',  # Game Boy
+    'gde3g9k1',  # Game Boy Color
+    '3167d6q2',  # Game Boy Advance
     'vm9v3ne3',  # Game Boy Interface
     '7m6yvw6p',  # Game Boy Player
     '3167jd6q',  # Super Game Boy
     'n5e147e2',  # Super Game Boy 2
-    '8gejn93d',  # Wii U
-    'v06dk3e4',  # Wii
     'nzelreqp',  # Wii Virtual Console
     '7g6mx89r',  # 3DS Virtual Console
 ]
